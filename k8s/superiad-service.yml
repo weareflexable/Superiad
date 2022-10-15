@@ -4,7 +4,6 @@ metadata:
   name: superiad
   namespace: flexable
 spec:
-  type: NodePort
   selector:
     app: superiad
   ports:
