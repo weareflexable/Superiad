@@ -20,7 +20,7 @@ spec:
               memory: "512Mi"
               cpu: "100m"
           ports:
-            - containerPort: 8000
+            - containerPort: 80
           volumeMounts:
             - mountPath: "/app/.env"
               subPath: ".env"
@@ -28,7 +28,7 @@ spec:
               readOnly: true
           env:
             - name: "APP_PORT"
-              value: "8000"
+              value: "80"
       volumes:
         - name: superiad-env-file
           secret:
