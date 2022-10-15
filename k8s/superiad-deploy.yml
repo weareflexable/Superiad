@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: superiad
+  namespace: flexable
+spec:
+  selector:
+    matchLabels:
+      app: superiad
+  template:
+    metadata:
+      labels:
+        app: superiad
+    spec:
+      containers:
+        - name: superiad
+          image: 816119410753.dkr.ecr.us-east-2.amazonaws.com/flexable-superiad
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "100m"
+          ports:
+            - containerPort: 8000
+          volumeMounts:
+            - mountPath: "/app/.env"
+              subPath: ".env"
+              name: superiad-env-file
+              readOnly: true
+          env:
+            - name: "APP_PORT"
+              value: "8000"
+      volumes:
+        - name: superiad-env-file
+          secret:
+            secretName: superiad-env-secret
