@@ -21,6 +21,7 @@ type config struct {
 	NETWORK_RPC_URL_POLYGON  string   `env:"NETWORK_RPC_URL_POLYGON,notEmpty"`
 	TOKEN                    string   `env:"TOKEN,notEmpty"`
 	APP_ENVIRONMENT          string   `env:"APP_ENVIRONMENT,notEmpty"`
+	OPERATOR_MNEMONIC        string   `env:"OPERATOR_MNEMONIC,notEmpty"`
 }
 
 var EnvVars config = config{}

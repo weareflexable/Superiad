@@ -5,6 +5,7 @@ import (
 	"github.com/TheLazarusNetwork/superiad/api/v1/matic/approve"
 	approveall "github.com/TheLazarusNetwork/superiad/api/v1/matic/approveAll"
 	"github.com/TheLazarusNetwork/superiad/api/v1/matic/checkbalance"
+	"github.com/TheLazarusNetwork/superiad/api/v1/matic/delegate"
 	"github.com/TheLazarusNetwork/superiad/api/v1/matic/fetchwallet"
 	"github.com/TheLazarusNetwork/superiad/api/v1/matic/isowner"
 	signmessage "github.com/TheLazarusNetwork/superiad/api/v1/matic/signMessage"
@@ -28,5 +29,6 @@ func ApplyRoutes(r *gin.RouterGroup) {
 		transfer.ApplyRoutes(v1)
 		approve.ApplyRoutes(v1)
 		approveall.ApplyRoutes(v1)
+		delegate.ApplyRoutes(v1)
 	}
 }
