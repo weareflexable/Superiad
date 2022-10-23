@@ -3,6 +3,7 @@ package onlyunlockedmiddleware
 import (
 	"bytes"
 	"errors"
+	"fmt"
 	"io"
 	"net/http"
 
@@ -26,7 +27,8 @@ func OnlyUnlocked() gin.HandlerFunc {
 		var req AccessRequest
 		err = c.ShouldBindJSON(&req)
 		if err != nil {
-			httpo.NewErrorResponse(http.StatusBadRequest, "body is invalid").SendD(c)
+			err := fmt.Errorf("body is invalid: %w", err)
+			httpo.NewErrorResponse(http.StatusBadRequest, err.Error()).SendD(c)
 			c.Abort()
 			return
 		}

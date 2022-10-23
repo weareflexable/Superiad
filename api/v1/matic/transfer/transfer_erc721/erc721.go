@@ -64,5 +64,5 @@ func sendSuccessResponse(c *gin.Context, hash string, userId string) {
 	if err := user.AddTrasactionHash(userId, hash); err != nil {
 		logo.Errorf("failed to add transaction hash: %v to user id: %v, error: %s", hash, userId, err)
 	}
-	httpo.NewSuccessResponse(200, "trasaction initiated", payload).SendD(c)
+	httpo.NewSuccessResponseP(200, "trasaction initiated", payload).SendD(c)
 }

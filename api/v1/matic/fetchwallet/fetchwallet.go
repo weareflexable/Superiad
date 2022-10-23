@@ -50,6 +50,6 @@ func fetchwallet(c *gin.Context) {
 	payload := FetchWalletPayload{
 		WalletAddress: walletAddr,
 	}
-	httpo.NewSuccessResponse(200, "wallet address fetched", payload).SendD(c)
+	httpo.NewSuccessResponseP(200, "wallet address fetched", payload).SendD(c)
 
 }

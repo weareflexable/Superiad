@@ -56,5 +56,5 @@ func erc20CheckBalance(c *gin.Context) {
 	payload := CheckErc20BalancePayload{
 		Balance: balance.String(),
 	}
-	httpo.NewSuccessResponse(200, "balance successfully fetched", payload).SendD(c)
+	httpo.NewSuccessResponseP(200, "balance successfully fetched", payload).SendD(c)
 }
