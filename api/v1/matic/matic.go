@@ -7,9 +7,9 @@ import (
 	"github.com/TheLazarusNetwork/superiad/api/v1/matic/checkbalance"
 	"github.com/TheLazarusNetwork/superiad/api/v1/matic/delegate"
 	"github.com/TheLazarusNetwork/superiad/api/v1/matic/fetchwallet"
-	"github.com/TheLazarusNetwork/superiad/api/v1/matic/getstatus/getstatus_erc721"
+	"github.com/TheLazarusNetwork/superiad/api/v1/matic/getstatus"
 	"github.com/TheLazarusNetwork/superiad/api/v1/matic/isowner"
-	"github.com/TheLazarusNetwork/superiad/api/v1/matic/setstatus/setstatus_erc721"
+	"github.com/TheLazarusNetwork/superiad/api/v1/matic/setstatus"
 	signmessage "github.com/TheLazarusNetwork/superiad/api/v1/matic/signMessage"
 	"github.com/TheLazarusNetwork/superiad/api/v1/matic/transfer"
 	verifysignature "github.com/TheLazarusNetwork/superiad/api/v1/matic/verifySignature"
@@ -32,7 +32,7 @@ func ApplyRoutes(r *gin.RouterGroup) {
 		approve.ApplyRoutes(v1)
 		approveall.ApplyRoutes(v1)
 		delegate.ApplyRoutes(v1)
-		setstatus_erc721.ApplyRoutes(v1)
-		getstatus_erc721.ApplyRoutes(v1)
+		setstatus.ApplyRoutes(v1)
+		getstatus.ApplyRoutes(v1)
 	}
 }

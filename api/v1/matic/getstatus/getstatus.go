@@ -1,4 +1,4 @@
-package delegate
+package getstatus
 
 import (
 	"github.com/TheLazarusNetwork/superiad/api/v1/matic/getstatus/getstatus_erc721"
