@@ -60,5 +60,4 @@ func getStatusErc721(c *gin.Context) {
 		Status: status,
 	}).SendD(c)
 
-	return
 }

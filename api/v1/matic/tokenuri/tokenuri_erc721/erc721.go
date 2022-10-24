@@ -60,5 +60,4 @@ func tokenUriErc721(c *gin.Context) {
 	}
 	httpo.NewSuccessResponseP(200, "token uri fetched", payload).SendD(c)
 
-	return
 }
