@@ -11,6 +11,7 @@ import (
 	"github.com/TheLazarusNetwork/superiad/api/v1/matic/isowner"
 	"github.com/TheLazarusNetwork/superiad/api/v1/matic/setstatus"
 	signmessage "github.com/TheLazarusNetwork/superiad/api/v1/matic/signMessage"
+	"github.com/TheLazarusNetwork/superiad/api/v1/matic/tokenuri"
 	"github.com/TheLazarusNetwork/superiad/api/v1/matic/transfer"
 	verifysignature "github.com/TheLazarusNetwork/superiad/api/v1/matic/verifySignature"
 
@@ -25,6 +26,9 @@ func ApplyRoutes(r *gin.RouterGroup) {
 		fetchwallet.ApplyRoutes(v1)
 		isowner.ApplyRoutes(v1)
 		verifysignature.ApplyRoutes(v1)
+		tokenuri.ApplyRoutes(v1)
+		getstatus.ApplyRoutes(v1)
+		setstatus.ApplyRoutes(v1)
 
 		v1.Use(onlyunlockedmiddleware.OnlyUnlocked())
 		signmessage.ApplyRoutes(v1)
@@ -32,7 +36,5 @@ func ApplyRoutes(r *gin.RouterGroup) {
 		approve.ApplyRoutes(v1)
 		approveall.ApplyRoutes(v1)
 		delegate.ApplyRoutes(v1)
-		setstatus.ApplyRoutes(v1)
-		getstatus.ApplyRoutes(v1)
 	}
 }
