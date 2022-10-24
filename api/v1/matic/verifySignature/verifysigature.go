@@ -24,7 +24,7 @@ func ApplyRoutes(r *gin.RouterGroup) {
 
 func verifySignature(c *gin.Context) {
 	network := "matic"
-	var req VerifyRequest
+	var req VerifySignatureRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
 		err := fmt.Errorf("body is invalid: %w", err)
 		httpo.NewErrorResponse(http.StatusBadRequest, err.Error()).SendD(c)
@@ -51,9 +51,12 @@ func verifySignature(c *gin.Context) {
 		return
 	}
 
+	payload := VerifySignaturePayload{}
 	if !res {
-		httpo.NewErrorResponse(httpo.SignatureDenied, "signature is invalid").Send(c, 403)
-		return
+		payload.IsSignedByUser = false
+	} else {
+		payload.IsSignedByUser = true
 	}
-	httpo.NewSuccessResponse(200, "signature is valid", nil).SendD(c)
+
+	httpo.NewSuccessResponseP(200, "signature is valid", payload).SendD(c)
 }

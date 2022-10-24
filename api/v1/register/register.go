@@ -29,6 +29,6 @@ func register(c *gin.Context) {
 		payload := RegisterPayload{
 			Uid: uid,
 		}
-		httpo.NewSuccessResponse(200, "user registration successfull", payload).SendD(c)
+		httpo.NewSuccessResponseP(200, "user registration successfull", payload).SendD(c)
 	}
 }

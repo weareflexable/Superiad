@@ -57,5 +57,5 @@ func nativeCheckBalance(c *gin.Context) {
 	payload := CheckNativeBalancePayload{
 		Balance: balance.String(),
 	}
-	httpo.NewSuccessResponse(200, "balance successfully fetched", payload).SendD(c)
+	httpo.NewSuccessResponseP(200, "balance successfully fetched", payload).SendD(c)
 }

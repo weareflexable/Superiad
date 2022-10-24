@@ -38,8 +38,8 @@ func setLock(c *gin.Context) {
 		logo.Errorf("failed to set lock status for user with id: %s, error: %s", req.Uid, err)
 		return
 	} else if *req.LockStatus {
-		httpo.NewSuccessResponse(200, "user locked", nil).SendD(c)
+		httpo.NewSuccessResponse(200, "user locked").SendD(c)
 	} else {
-		httpo.NewSuccessResponse(200, "user unlocked", nil).SendD(c)
+		httpo.NewSuccessResponse(200, "user unlocked").SendD(c)
 	}
 }

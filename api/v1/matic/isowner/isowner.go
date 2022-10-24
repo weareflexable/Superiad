@@ -54,6 +54,6 @@ func isowner(c *gin.Context) {
 	payload := IsOwnerPayload{
 		IsOwner: isOwner,
 	}
-	httpo.NewSuccessResponse(200, "Result success", payload).SendD(c)
+	httpo.NewSuccessResponseP(200, "Result success", payload).SendD(c)
 
 }

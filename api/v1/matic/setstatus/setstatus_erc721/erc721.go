@@ -1,13 +1,13 @@
-package delegate_erc721
+package setstatus_erc721
 
 import (
 	"errors"
+	"math/big"
 	"net/http"
 
 	"github.com/TheLazarusNetwork/go-helpers/httpo"
 	"github.com/TheLazarusNetwork/go-helpers/logo"
 	"github.com/TheLazarusNetwork/superiad/models/contracts"
-	"github.com/TheLazarusNetwork/superiad/models/user"
 	"github.com/TheLazarusNetwork/superiad/pkg/network/polygon"
 	"github.com/ethereum/go-ethereum/common"
 	"gorm.io/gorm"
@@ -20,29 +20,16 @@ func ApplyRoutes(r *gin.RouterGroup) {
 	g := r.Group("/erc721")
 	{
 
-		g.POST("", delegateErc721)
+		g.POST("", setStatusErc721)
 	}
 }
 
-func delegateErc721(c *gin.Context) {
+func setStatusErc721(c *gin.Context) {
 	network := "matic"
-	var req DelegateErc721Request
+	var req SetStatusRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
 		logo.Errorf("invalid request %s", err)
 		httpo.NewErrorResponse(http.StatusBadRequest, "body is invalid").SendD(c)
-		return
-	}
-	mnemonic, err := user.GetMnemonic(req.UserId)
-	if err != nil {
-		if errors.Is(err, gorm.ErrRecordNotFound) {
-			httpo.NewErrorResponse(httpo.UserNotFound, "user not found").Send(c, 404)
-
-			return
-		}
-
-		httpo.NewErrorResponse(http.StatusInternalServerError, "failed to fetch user").SendD(c)
-		logo.Errorf("failed to fetch user mnemonic for userId: %v, error: %s",
-			req.UserId, err)
 		return
 	}
 
@@ -62,23 +49,19 @@ func delegateErc721(c *gin.Context) {
 	}
 
 	erc721ContractAddr := common.HexToAddress(req.ContractAddress)
+
+	bigIntTokenId := big.NewInt(req.TokenId)
 	var hash string
-	hash, err = polygon.DelegateErc721(mnemonic, erc721ContractAddr, req.MetaDataHash)
+	hash, err = polygon.SetStatus(erc721ContractAddr, req.Status, bigIntTokenId)
 	if err != nil {
-		httpo.NewErrorResponse(http.StatusInternalServerError, "failed to tranfer").SendD(c)
-		logo.Errorf("failed to delegate erc721 to wallet of userId: %v , network: %v, contractAddr: %v, error: %s",
-			req.UserId, network, req.ContractAddress, err)
+		httpo.NewErrorResponse(http.StatusInternalServerError, "failed to set status").SendD(c)
+		logo.Errorf("failed to set status of token with id: %d network: %s, contractAddr: %s, error: %s",
+			req.TokenId, network, req.ContractAddress, err)
 		return
 	}
-	sendSuccessResponse(c, hash, req.UserId)
-}
-
-func sendSuccessResponse(c *gin.Context, hash string, userId string) {
-	payload := DelegateErc721Payload{
+	payload := SetStatusPayload{
 		TrasactionHash: hash,
 	}
-	if err := user.AddTrasactionHash(userId, hash); err != nil {
-		logo.Errorf("failed to add transaction hash: %v to user id: %v, error: %s", hash, userId, err)
-	}
+
 	httpo.NewSuccessResponseP(200, "trasaction initiated", payload).SendD(c)
 }

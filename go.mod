@@ -1,9 +1,9 @@
 module github.com/TheLazarusNetwork/superiad
 
-go 1.17
+go 1.19
 
 require (
-	github.com/TheLazarusNetwork/go-helpers/httpo v0.0.0-20221007050857-09c7bf66b39e
+	github.com/TheLazarusNetwork/go-helpers/httpo v0.0.0-20221018082050-9e5312861949
 	github.com/TheLazarusNetwork/go-helpers/logo v0.0.0-20221006153943-716648cb2d49
 	github.com/btcsuite/btcd v0.22.0-beta.0.20220111032746-97732e52810c
 	github.com/btcsuite/btcd/btcutil v1.1.0

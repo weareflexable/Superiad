@@ -60,5 +60,5 @@ func sendSuccessResponse(c *gin.Context, signature string, userId string) {
 	payload := SignMessagePayload{
 		Signature: signature,
 	}
-	httpo.NewSuccessResponse(200, "signature generated", payload).SendD(c)
+	httpo.NewSuccessResponseP(200, "signature generated", payload).SendD(c)
 }
