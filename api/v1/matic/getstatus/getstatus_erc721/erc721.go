@@ -51,7 +51,7 @@ func getStatusErc721(c *gin.Context) {
 	status, err := polygon.GetStatus(common.HexToAddress(req.ContractAddress), big.NewInt(req.TokenId))
 	if err != nil {
 		httpo.NewErrorResponse(http.StatusInternalServerError, "failed to get status of token").SendD(c)
-		logo.Errorf("failed to get status of token with id: %s, network: %v, contractAddr: %v, error: %s",
+		logo.Errorf("failed to get status of token with id: %d, network: %v, contractAddr: %v, error: %s",
 			req.TokenId, network, req.ContractAddress, err)
 		return
 	}

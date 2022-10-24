@@ -50,7 +50,7 @@ func tokenUriErc721(c *gin.Context) {
 	tokenUri, err := polygon.TokenUri(common.HexToAddress(req.ContractAddress), big.NewInt(req.TokenId))
 	if err != nil {
 		httpo.NewErrorResponse(http.StatusInternalServerError, "failed to get token uri").SendD(c)
-		logo.Errorf("failed to get token uri with id: %s, network: %v, contractAddr: %v, error: %s",
+		logo.Errorf("failed to get token uri with id: %d, network: %v, contractAddr: %v, error: %s",
 			req.TokenId, network, req.ContractAddress, err)
 		return
 	}
