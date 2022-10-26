@@ -2,14 +2,19 @@ package delegate_erc721
 
 import (
 	"errors"
+	"fmt"
 	"net/http"
 
 	"github.com/TheLazarusNetwork/go-helpers/httpo"
 	"github.com/TheLazarusNetwork/go-helpers/logo"
+	"github.com/TheLazarusNetwork/superiad/config/envconfig"
+	"github.com/TheLazarusNetwork/superiad/generated/generc721"
 	"github.com/TheLazarusNetwork/superiad/models/contracts"
 	"github.com/TheLazarusNetwork/superiad/models/user"
 	"github.com/TheLazarusNetwork/superiad/pkg/network/polygon"
+	"github.com/TheLazarusNetwork/superiad/pkg/platform"
 	"github.com/ethereum/go-ethereum/common"
+	"github.com/ethereum/go-ethereum/ethclient"
 	"gorm.io/gorm"
 
 	"github.com/gin-gonic/gin"
@@ -81,4 +86,31 @@ func sendSuccessResponse(c *gin.Context, hash string, userId string) {
 		logo.Errorf("failed to add transaction hash: %v to user id: %v, error: %s", hash, userId, err)
 	}
 	httpo.NewSuccessResponseP(200, "trasaction initiated", payload).SendD(c)
+}
+
+func PlatformRoutine() {
+	client, err := ethclient.Dial(polygon.GetRpcUrl())
+	if err != nil {
+		err = fmt.Errorf("failed to dial rpc url: %w", err)
+		logo.Fatal(err)
+	}
+	contractAddr := common.HexToAddress(envconfig.EnvVars.FLEXABLE_CONTRACT_ADDRESS)
+
+	MATIC_DELEGATE_ERC721_ENDPOINT := "matic/delegate/erc721"
+	instance, err := generc721.NewErc721(contractAddr, client)
+	if err != nil {
+		logo.Fatalf("failed to load contract at address %s, error: %s", contractAddr, err)
+	}
+	ticketCreatedChannel := make(chan *generc721.Erc721TicketCreated, 10)
+	_, err = instance.WatchTicketCreated(nil, ticketCreatedChannel, nil)
+	if err != nil {
+		logo.Fatalf("failed to listen to an event %s, error: %s", "ArtifactCreated", err)
+	}
+	for {
+		event := <-ticketCreatedChannel
+		err = platform.TransactionHash(event.Raw.TxHash.Hex(), event.TokenID.Int64(), MATIC_DELEGATE_ERC721_ENDPOINT)
+		if err != nil {
+			logo.Errorf("failed to report to platform: event: %s, error: %s", "ArtifactCreated", err)
+		}
+	}
 }

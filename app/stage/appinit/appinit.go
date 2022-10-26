@@ -5,6 +5,7 @@ import (
 	"github.com/TheLazarusNetwork/superiad/app/stage/appinit/dbmigrate"
 	"github.com/TheLazarusNetwork/superiad/app/stage/appinit/envinit"
 	"github.com/TheLazarusNetwork/superiad/app/stage/appinit/logoinit"
+	"github.com/TheLazarusNetwork/superiad/pkg/platform"
 )
 
 func Init() {
@@ -12,4 +13,5 @@ func Init() {
 	logoinit.Init()
 	dbconinit.Init()
 	dbmigrate.Migrate()
+	platform.Init()
 }

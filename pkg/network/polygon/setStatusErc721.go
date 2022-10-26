@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"math/big"
 
+	"github.com/TheLazarusNetwork/go-helpers/logo"
 	"github.com/TheLazarusNetwork/superiad/config/envconfig"
 	"github.com/TheLazarusNetwork/superiad/generated/generc721"
 	"github.com/TheLazarusNetwork/superiad/pkg/wallet"
@@ -33,6 +34,21 @@ func SetStatus(contractAddr common.Address, status string, tokenId *big.Int) (st
 		err = fmt.Errorf("failed to send raw transaction: %w", err)
 		return "", err
 	}
+
+	instance, err := generc721.NewErc721(contractAddr, client)
+	if err != nil {
+		logo.Errorf("failed to load contract at address %s, error: %s", contractAddr, err)
+		return "", err
+	}
+	statusUpdatedChannel := make(chan *generc721.Erc721StatusUpdated, 10)
+	subs, err := instance.WatchStatusUpdated(nil, statusUpdatedChannel)
+	if err != nil {
+		logo.Fatalf("failed to listen to an event %s, error: %s", "StatusUpdated", err)
+		return "", err
+	}
+
+	subs.Unsubscribe()
+
 	return tx.Hash().Hex(), nil
 
 }
