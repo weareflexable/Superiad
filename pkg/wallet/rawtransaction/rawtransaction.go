@@ -58,6 +58,8 @@ func SendRawTrasac(privateKey *ecdsa.PrivateKey, client ethclient.Client, chainI
 	big2 := big.NewInt(2)
 	mulRes := big.NewInt(0).Mul(baseFee, big2)
 	maxFeePerGas := big.NewInt(0).Add(mulRes, maxPriorityFeePerGas)
+	maxFeePerGas = big.NewInt(81000000000)
+	maxPriorityFeePerGas = big.NewInt(71000000000)
 	tx := types.NewTx(&types.DynamicFeeTx{
 		ChainID:   chainID,
 		Nonce:     nonce,

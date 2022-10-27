@@ -12,7 +12,7 @@ import (
 )
 
 func GetChainId() (int, error) {
-	return 80001, nil
+	return 137, nil
 }
 
 func GetPath() string {
