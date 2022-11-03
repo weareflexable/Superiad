@@ -8,8 +8,16 @@ build:
     docker:
       dockerfile: Dockerfile
 deploy:
-  kubectl:
-    defaultNamespace: flexable
-    manifests:
-    - k8s/superiad-deploy.yml
-    - k8s/superiad-service.yml
+  helm:
+    releases:
+    - name: flexable-superiad
+      namespace: flexable
+      repo: https://thelazarusnetwork.github.io/lazarus-k8s
+      remoteChart: deployment
+      version: 0.1.4
+      artifactOverrides:
+        image: 816119410753.dkr.ecr.us-east-2.amazonaws.com/flexable-superiad
+      imageStrategy:
+        helm: {}
+      valuesFiles:
+        - "values.yml"
