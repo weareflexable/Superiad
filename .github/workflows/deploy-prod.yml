@@ -37,4 +37,4 @@ jobs:
           echo "$KUBE_CONFIG_DATA" | base64 -d > ~/.kube/config
           curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/latest/skaffold-linux-amd64 && \
           sudo install skaffold /usr/local/bin/
-          skaffold run
+          skaffold run --namespace="flexable"
