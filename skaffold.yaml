@@ -13,7 +13,7 @@ deploy:
     - name: flexable-superiad
       repo: https://thelazarusnetwork.github.io/lazarus-k8s
       remoteChart: deployment
-      version: 0.1.4
+      version: 0.1.5
       artifactOverrides:
         image: 816119410753.dkr.ecr.us-east-2.amazonaws.com/flexable-superiad
       imageStrategy:
