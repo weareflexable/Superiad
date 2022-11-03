@@ -11,7 +11,6 @@ deploy:
   helm:
     releases:
     - name: flexable-superiad
-      namespace: flexable
       repo: https://thelazarusnetwork.github.io/lazarus-k8s
       remoteChart: deployment
       version: 0.1.4
