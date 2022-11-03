@@ -1,6 +1,5 @@
 namespace: flexable
-host: platform.flexabledats.com
-name: platform
-env_secret_name: platform-env-secret
+name: superiad
+env_secret_name: superiad-env-secret
 alb_group_name: flexable-alb
 port: 8000
