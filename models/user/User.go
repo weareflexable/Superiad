@@ -3,9 +3,9 @@ package user
 import (
 	"errors"
 
-	"github.com/TheLazarusNetwork/superiad/models/transaction"
-	"github.com/TheLazarusNetwork/superiad/pkg/store"
-	"github.com/TheLazarusNetwork/superiad/pkg/wallet"
+	"github.com/Weareflexable/Superiad/models/transaction"
+	"github.com/Weareflexable/Superiad/pkg/store"
+	"github.com/Weareflexable/Superiad/pkg/wallet"
 	"github.com/google/uuid"
 )
 

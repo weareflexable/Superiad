@@ -4,7 +4,7 @@ package environment
 import (
 	"log"
 
-	"github.com/TheLazarusNetwork/superiad/config/envconfig"
+	"github.com/Weareflexable/Superiad/config/envconfig"
 )
 
 type Environment int

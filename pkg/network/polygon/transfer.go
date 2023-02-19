@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/TheLazarusNetwork/superiad/pkg/wallet"
+	"github.com/Weareflexable/Superiad/pkg/wallet"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/consensus/misc"
 	"github.com/ethereum/go-ethereum/core/types"

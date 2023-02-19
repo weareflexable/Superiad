@@ -1,7 +1,7 @@
 package platform
 
 import (
-	"github.com/TheLazarusNetwork/superiad/config/envconfig"
+	"github.com/Weareflexable/Superiad/config/envconfig"
 	"github.com/go-resty/resty/v2"
 )
 

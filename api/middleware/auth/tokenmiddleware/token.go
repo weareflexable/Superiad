@@ -6,7 +6,7 @@ import (
 
 	"github.com/TheLazarusNetwork/go-helpers/httpo"
 	"github.com/TheLazarusNetwork/go-helpers/logo"
-	"github.com/TheLazarusNetwork/superiad/config/envconfig"
+	"github.com/Weareflexable/Superiad/config/envconfig"
 
 	"github.com/gin-gonic/gin"
 )

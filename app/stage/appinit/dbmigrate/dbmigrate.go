@@ -3,10 +3,10 @@ package dbmigrate
 
 import (
 	"github.com/TheLazarusNetwork/go-helpers/logo"
-	"github.com/TheLazarusNetwork/superiad/models/contracts"
-	"github.com/TheLazarusNetwork/superiad/models/transaction"
-	"github.com/TheLazarusNetwork/superiad/models/user"
-	"github.com/TheLazarusNetwork/superiad/pkg/store"
+	"github.com/Weareflexable/Superiad/models/contracts"
+	"github.com/Weareflexable/Superiad/models/transaction"
+	"github.com/Weareflexable/Superiad/models/user"
+	"github.com/Weareflexable/Superiad/pkg/store"
 )
 
 func Migrate() {

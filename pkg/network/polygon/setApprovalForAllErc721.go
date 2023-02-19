@@ -1,9 +1,9 @@
 package polygon
 
 import (
-	"github.com/TheLazarusNetwork/superiad/generated/generc721"
-	"github.com/TheLazarusNetwork/superiad/pkg/wallet"
-	rawtrasaction "github.com/TheLazarusNetwork/superiad/pkg/wallet/rawtransaction"
+	"github.com/Weareflexable/Superiad/generated/generc721"
+	"github.com/Weareflexable/Superiad/pkg/wallet"
+	rawtrasaction "github.com/Weareflexable/Superiad/pkg/wallet/rawtransaction"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/ethclient"
 )

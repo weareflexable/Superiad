@@ -3,16 +3,16 @@ package polygon
 import (
 	"fmt"
 
-	"github.com/TheLazarusNetwork/superiad/config/envconfig"
-	"github.com/TheLazarusNetwork/superiad/generated/generc721"
-	"github.com/TheLazarusNetwork/superiad/pkg/wallet"
-	rawtrasaction "github.com/TheLazarusNetwork/superiad/pkg/wallet/rawtransaction"
+	"github.com/Weareflexable/Superiad/config/envconfig"
+	"github.com/Weareflexable/Superiad/generated/flexablenft"
+	"github.com/Weareflexable/Superiad/pkg/wallet"
+	rawtrasaction "github.com/Weareflexable/Superiad/pkg/wallet/rawtransaction"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/crypto"
 	"github.com/ethereum/go-ethereum/ethclient"
 )
 
-func DelegateErc721(mnemonic string, contractAddr common.Address, metadataHash string) (string, error) {
+func DelegateNFTCreation(mnemonic string, contractAddr common.Address, metadataURI string) (string, error) {
 	privKey, err := wallet.GetWallet(mnemonic, GetPath())
 	if err != nil {
 		err = fmt.Errorf("failed to get user wallet from mnemonic: %w", err)
@@ -35,7 +35,7 @@ func DelegateErc721(mnemonic string, contractAddr common.Address, metadataHash s
 		return "", err
 	}
 	walletAddr := crypto.PubkeyToAddress(privKey.PublicKey)
-	tx, err := rawtrasaction.SendRawTrasac(operatorPrivKey, *client, int64(chainId), 310000, contractAddr, generc721.Erc721MetaData.ABI, "delegateTicketCreation", walletAddr, metadataHash)
+	tx, err := rawtrasaction.SendRawTrasac(operatorPrivKey, *client, int64(chainId), 310000, contractAddr, flexablenft.FlexablenftMetaData.ABI, "delegateTicketCreation", walletAddr, metadataURI)
 	if err != nil {
 		err = fmt.Errorf("failed to send raw transaction: %w", err)
 		return "", err

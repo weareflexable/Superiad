@@ -7,7 +7,8 @@ import (
 )
 
 func TransactionHash(transactionHash string, tokenId int64, endPoint string) error {
-	var apiRes httpo.ApiResponse[any]
+	var apiResSuccess httpo.ApiSuccessResponse[any]
+	// var apiResFailure httpo.ApiErrorResponse[any]
 
 	req := TransactionSuccessRequest{
 		TransactionHash: transactionHash,
@@ -15,7 +16,7 @@ func TransactionHash(transactionHash string, tokenId int64, endPoint string) err
 		EndPoint:        endPoint,
 	}
 	res, err := platformClient.R().
-		SetResult(&apiRes).
+		SetResult(&apiResSuccess).
 		SetHeader("Content-Type", "application/json").
 		SetBody(&req).Post(TRANSACTION_SUCCESS_ENDPOINT)
 	if err != nil {

@@ -3,7 +3,7 @@ package polygon
 import (
 	"math/big"
 
-	"github.com/TheLazarusNetwork/superiad/generated/generc721"
+	"github.com/Weareflexable/Superiad/generated/generc721"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/ethclient"
 )

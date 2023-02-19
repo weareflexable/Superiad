@@ -6,9 +6,8 @@ import (
 	"time"
 
 	"github.com/TheLazarusNetwork/go-helpers/logo"
-	"github.com/TheLazarusNetwork/superiad/api"
-	"github.com/TheLazarusNetwork/superiad/app/stage/apprun/apiroutines"
-	"github.com/TheLazarusNetwork/superiad/config/envconfig"
+	"github.com/Weareflexable/Superiad/api"
+	"github.com/Weareflexable/Superiad/config/envconfig"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
@@ -24,7 +23,6 @@ func Run() {
 	ginApp.Use(corsM)
 	api.ApplyRoutes(ginApp)
 	port := envconfig.EnvVars.APP_PORT
-	apiroutines.Run()
 	err := ginApp.Run(fmt.Sprintf(":%d", port))
 	if err != nil {
 		logo.Fatalf("failed to serve app on port %d: %s", port, err)

@@ -1,7 +1,7 @@
 package delegate
 
 import (
-	"github.com/TheLazarusNetwork/superiad/api/v1/matic/delegate/delegate_erc721"
+	"github.com/Weareflexable/Superiad/api/v1/matic/delegateticketcreation/delegatenftcreation"
 
 	"github.com/gin-gonic/gin"
 )
@@ -11,6 +11,6 @@ func ApplyRoutes(r *gin.RouterGroup) {
 	g := r.Group("/delegate")
 	{
 
-		delegate_erc721.ApplyRoutes(g)
+		delegatenftcreation.ApplyRoutes(g)
 	}
 }

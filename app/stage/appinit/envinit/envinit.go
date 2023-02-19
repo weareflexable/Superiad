@@ -1,6 +1,6 @@
 package envinit
 
-import "github.com/TheLazarusNetwork/superiad/config/envconfig"
+import "github.com/Weareflexable/Superiad/config/envconfig"
 
 func Init() {
 	envconfig.InitEnvVars()

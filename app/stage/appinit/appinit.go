@@ -1,11 +1,11 @@
 package appinit
 
 import (
-	"github.com/TheLazarusNetwork/superiad/app/stage/appinit/dbconinit"
-	"github.com/TheLazarusNetwork/superiad/app/stage/appinit/dbmigrate"
-	"github.com/TheLazarusNetwork/superiad/app/stage/appinit/envinit"
-	"github.com/TheLazarusNetwork/superiad/app/stage/appinit/logoinit"
-	"github.com/TheLazarusNetwork/superiad/pkg/platform"
+	"github.com/Weareflexable/Superiad/app/stage/appinit/dbconinit"
+	"github.com/Weareflexable/Superiad/app/stage/appinit/dbmigrate"
+	"github.com/Weareflexable/Superiad/app/stage/appinit/envinit"
+	"github.com/Weareflexable/Superiad/app/stage/appinit/logoinit"
+	"github.com/Weareflexable/Superiad/pkg/platform"
 )
 
 func Init() {

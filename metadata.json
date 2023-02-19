@@ -1,0 +1,34 @@
+{
+    "name": "Line Skip | FlexableNFT",
+    "description": "NFT for getting access to exclusive events around your city without any delay. Get access with Flexable!",
+    "external_url": "https://flexablenft.com",
+    "image": "ipfs://bafkreig4mtp2mpdkepp2zncnl3ytow3vfu3luyefcl4mnbpx6honx3t7cq",
+    "attributes": [
+        {
+            "trait_type": "Venue",
+            "value": "Syracuse, NY"
+        },
+        {
+            "trait_type": "Location",
+            "value": "37.957448, 201.578814"
+        },
+        {
+            "trait_type": "Category",
+            "value": "Line Skip"
+        },
+        {
+            "trait_type": "Quantity",
+            "value": "2"
+        },
+        {
+            "display_type": "date",
+            "trait_type": "Validity Starts",
+            "value": 1679427467000
+        },
+        {
+            "display_type": "date",
+            "trait_type": "Validity Ends",
+            "value": 1679527467000
+        }
+    ]
+}

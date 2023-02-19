@@ -1,6 +1,6 @@
 package contracts
 
-import "github.com/TheLazarusNetwork/superiad/pkg/store"
+import "github.com/Weareflexable/Superiad/pkg/store"
 
 // Enum doesn't work properly for now
 type Contract struct {

@@ -1,7 +1,7 @@
 package getstatus
 
 import (
-	"github.com/TheLazarusNetwork/superiad/api/v1/matic/getstatus/getstatus_erc721"
+	"github.com/Weareflexable/Superiad/api/v1/matic/getstatus/getstatus_erc721"
 
 	"github.com/gin-gonic/gin"
 )
