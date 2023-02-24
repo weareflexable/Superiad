@@ -16,6 +16,8 @@ logs
 # vendor/
 
 .env
+.json
+.vscode
 
 tmp
 build
