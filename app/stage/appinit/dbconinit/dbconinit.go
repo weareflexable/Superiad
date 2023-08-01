@@ -20,11 +20,11 @@ func Init() {
 		port     = envconfig.EnvVars.DB_PORT
 	)
 
-	dns := fmt.Sprintf("host=%s user=%s password=%s dbname=%s sslmode=allow port=%d",
+	dns := fmt.Sprintf("host=%s user=%s password=%s dbname=%s sslmode=required port=%d",
 		host, username, password, dbname, port)
 
 	var err error
-	
+
 	db, err := gorm.Open(postgres.New(postgres.Config{
 		DSN: dns,
 	}))
