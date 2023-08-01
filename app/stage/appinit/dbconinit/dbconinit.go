@@ -20,7 +20,7 @@ func Init() {
 		port     = envconfig.EnvVars.DB_PORT
 	)
 
-	dns := fmt.Sprintf("host=%s user=%s password=%s dbname=%s sslmode=required port=%d",
+	dns := fmt.Sprintf("host=%s user=%s password=%s dbname=%s sslmode=require port=%d",
 		host, username, password, dbname, port)
 
 	var err error
