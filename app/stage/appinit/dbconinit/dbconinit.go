@@ -24,6 +24,7 @@ func Init() {
 		host, username, password, dbname, port)
 
 	var err error
+	
 	db, err := gorm.Open(postgres.New(postgres.Config{
 		DSN: dns,
 	}))
