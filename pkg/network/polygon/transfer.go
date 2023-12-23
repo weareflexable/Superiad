@@ -58,11 +58,9 @@ func Transfer(mnemonic string, to common.Address, value big.Int) (string, error)
 		return "", err
 	}
 	baseFee := misc.CalcBaseFee(config, blk.Header())
-	gasMul := big.NewInt(3)
-	mulRes := big.NewInt(0).Mul(baseFee, gasMul)
+	big2 := big.NewInt(2)
+	mulRes := big.NewInt(0).Mul(baseFee, big2)
 	maxFeePerGas := big.NewInt(0).Add(mulRes, maxPriorityFeePerGas)
-	maxFeePerGas = big.NewInt(80000000000)
-	maxPriorityFeePerGas = big.NewInt(70000000000)
 	tx := types.NewTx(&types.DynamicFeeTx{
 		ChainID:   big.NewInt(int64(chainId)),
 		Nonce:     nonce,
