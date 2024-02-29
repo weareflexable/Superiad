@@ -44,10 +44,10 @@ jobs:
         script: |
           pwd
           cd superiad
-          podman stop superiad && podman rm superiad && podman image rm superiad
-          echo ${{ secrets.GHCR_TOKEN }} | podman login ghcr.io -u secrets.GHCR_USERNAME --password-stdin
-          podman pull ghcr.io/weareflexable/superiad:main
-          podman run --name="superiad" --env-file=.env -p 9079:8080 --net=bridge -d ghcr.io/weareflexable/superiad:main
+          sudo podman stop superiad && sudo podman rm superiad && sudo podman image rm superiad
+          echo ${{ secrets.GHCR_TOKEN }} | sudo podman login ghcr.io -u secrets.GHCR_USERNAME --password-stdin
+          sudo podman pull ghcr.io/weareflexable/superiad:main
+          sudo podman run --name="superiad" --env-file=.env -p 9079:8080 --net=bridge -d ghcr.io/weareflexable/superiad:main
 
     - name: Deploy on PROD server 
       if: github.ref == 'refs/heads/prod' 
