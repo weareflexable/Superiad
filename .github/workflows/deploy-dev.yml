@@ -49,6 +49,22 @@ jobs:
           sudo podman pull ghcr.io/weareflexable/superiad:main
           sudo podman run --name="superiad" --env-file=.env -p 9090:9090 --net=bridge -d ghcr.io/weareflexable/superiad:main
 
+    - name: Deploy on STAGING server 
+      if: github.ref == 'refs/heads/staging' 
+      uses: appleboy/ssh-action@v0.1.7
+      with:         
+        host: ${{ secrets.STAGING_REMOTE_SERVER_ADDRESS }}
+        username: ${{ secrets.STAGING_SERVER_USERNAME }}
+        key:  ${{ secrets.STAGING_REMOTE_SERVER_KEY }}
+        port: ${{ secrets.STAGING_SSH_PORT }} 
+        script: |
+          pwd
+          cd superiad
+          sudo podman stop superiad && sudo podman rm superiad && sudo podman image rm superiad
+          echo ${{ secrets.GHCR_TOKEN }} | sudo podman login ghcr.io -u secrets.GHCR_USERNAME --password-stdin
+          sudo podman pull ghcr.io/weareflexable/superiad:staging
+          sudo podman run --name="superiad" --env-file=.env -p 9090:9090 --net=bridge -d ghcr.io/weareflexable/superiad:staging
+
     - name: Deploy on PROD server 
       if: github.ref == 'refs/heads/prod' 
       uses: appleboy/ssh-action@v0.1.7
