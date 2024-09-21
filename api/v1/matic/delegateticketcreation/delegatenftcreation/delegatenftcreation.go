@@ -19,13 +19,61 @@ import (
 func ApplyRoutes(r *gin.RouterGroup) {
 	g := r.Group("/delegateTicketCreation")
 	{
-
 		g.POST("", delegateTicketCreation)
+		g.POST("/base", delegateTicketCreationForBase)
 	}
 }
 
 func delegateTicketCreation(c *gin.Context) {
 	network := "matic"
+	var req DelegateTicketCreationRequest
+	if err := c.ShouldBindJSON(&req); err != nil {
+		logo.Errorf("invalid request %s", err)
+		httpo.NewErrorResponse(http.StatusBadRequest, "body is invalid").SendD(c)
+		return
+	}
+	mnemonic, err := user.GetMnemonic(req.UserId)
+	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			httpo.NewErrorResponse(httpo.UserNotFound, "user not found").Send(c, 404)
+
+			return
+		}
+
+		httpo.NewErrorResponse(http.StatusInternalServerError, "failed to fetch user").SendD(c)
+		logo.Errorf("failed to fetch user mnemonic for userId: %v, error: %s",
+			req.UserId, err)
+		return
+	}
+
+	contractDetails, err := contracts.GetContract(req.ContractAddress)
+	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			httpo.NewErrorResponse(404, "contract not found in database").SendD(c)
+			return
+		}
+		httpo.NewErrorResponse(http.StatusInternalServerError, "failed to fetch contract details from database").SendD(c)
+		logo.Errorf("failed to fetch contract details from database, error: %s", err)
+		return
+	}
+	if contractDetails.ContractType != contracts.ERC721 {
+		httpo.NewErrorResponse(http.StatusBadRequest, "contract is not ERC721").SendD(c)
+		return
+	}
+
+	flexableNFTContractAddr := common.HexToAddress(req.ContractAddress)
+	var hash string
+	hash, err = polygon.DelegateNFTCreation(mnemonic, flexableNFTContractAddr, req.MetadataURI)
+	if err != nil {
+		httpo.NewErrorResponse(http.StatusInternalServerError, "failed to tranfer").SendD(c)
+		logo.Errorf("failed to delegate erc721 to wallet of userId: %v , network: %v, contractAddr: %v, error: %s",
+			req.UserId, network, req.ContractAddress, err)
+		return
+	}
+	sendSuccessResponse(c, hash, req.UserId)
+}
+func delegateTicketCreationForBase(c *gin.Context) {
+	network := "base"
 	var req DelegateTicketCreationRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
 		logo.Errorf("invalid request %s", err)
