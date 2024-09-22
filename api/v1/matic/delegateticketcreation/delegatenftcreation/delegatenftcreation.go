@@ -109,9 +109,9 @@ func delegateTicketCreationForBase(c *gin.Context) {
 		return
 	}
 
-	flexableNFTContractAddr := common.HexToAddress(req.ContractAddress)
+	// flexableNFTContractAddr := common.HexToAddress(req.ContractAddress)
 	var hash string
-	hash, err = polygon.DelegateNFTCreation(mnemonic, flexableNFTContractAddr, req.MetadataURI)
+	hash, err = polygon.DelegateNFTCreationForBase(mnemonic, req.MetadataURI)
 	if err != nil {
 		httpo.NewErrorResponse(http.StatusInternalServerError, "failed to tranfer").SendD(c)
 		logo.Errorf("failed to delegate erc721 to wallet of userId: %v , network: %v, contractAddr: %v, error: %s",

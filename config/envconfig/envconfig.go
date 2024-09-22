@@ -25,6 +25,7 @@ type config struct {
 	PLATFORM_BASE_URL         string   `env:"PLATFORM_BASE_URL,notEmpty"`
 	PLATFORM_TOKEN            string   `env:"PLATFORM_TOKEN,notEmpty"`
 	FLEXABLE_CONTRACT_ADDRESS string   `env:"FLEXABLE_CONTRACT_ADDRESS,notEmpty"`
+	PRIVATE_KEY               string   `env:"PRIVATE_KEY,notEmpty"`
 }
 
 var EnvVars config = config{}
