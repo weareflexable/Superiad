@@ -18,10 +18,15 @@ func Init() {
 		password = envconfig.EnvVars.DB_PASSWORD
 		dbname   = envconfig.EnvVars.DB_NAME
 		port     = envconfig.EnvVars.DB_PORT
+		ssh      = envconfig.EnvVars.DB_SSL_MODE
 	)
 
-	dns := fmt.Sprintf("host=%s user=%s password=%s dbname=%s sslmode=require port=%d",
-		host, username, password, dbname, port)
+	if len(envconfig.EnvVars.DB_SSL_MODE) == 0 || envconfig.EnvVars.DB_SSL_MODE == "nil" {
+		ssh = "disable"
+	}
+
+	dns := fmt.Sprintf("host=%s user=%s password=%s dbname=%s sslmode=%s port=%d",
+		host, username, password, dbname, ssh, port)
 
 	var err error
 

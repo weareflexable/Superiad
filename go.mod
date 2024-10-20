@@ -1,6 +1,6 @@
 module github.com/Weareflexable/Superiad
 
-go 1.19
+go 1.23
 
 require (
 	github.com/TheLazarusNetwork/go-helpers/httpo v0.0.0-20221204180104-cfbb53a9a2cb
